@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { ScrollReveal } from "@/components/enhanced-scroll-reveal";
+import { AnimatedSection } from "@/components/ui/animated-section";
 import { useEffect, useState } from "react";
 
 interface ProductCategory {
@@ -105,62 +105,63 @@ export function SolarEastProductShowcase() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
           {productCategories.map((category, index) => (
-            <ScrollReveal
+            <AnimatedSection
               key={category.id}
-              direction={index % 2 === 0 ? "right" : "left"}
-              duration={1.0}
+              animation={index % 2 === 0 ? "fadeInRight" : "fadeInLeft"}
+              duration={0.8}
               delay={0.2 * index}
+              className="h-full"
             >
-            <Link
-              href={`/products/${category.slug}`}
-              className="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 hover:border-green-200 block h-96"
-            >
-              {/* Full-size image background */}
-              <div className="absolute inset-0">
-                <Image
-                  src={category.image_url}
-                  alt={category.name}
-                  fill
-                  className="object-cover group-hover:scale-110 transition-transform duration-500"
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  priority
-                />
-              </div>
+              <Link
+                href={`/products/${category.slug}`}
+                className="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 hover:border-green-200 block h-96"
+              >
+                {/* Full-size image background */}
+                <div className="absolute inset-0 image-hover-zoom">
+                  <Image
+                    src={category.image_url}
+                    alt={category.name}
+                    fill
+                    className="object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    priority
+                  />
+                </div>
 
-              {/* Dark overlay */}
-              <div className="absolute inset-0 bg-black/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                {/* Dark overlay */}
+                <div className="absolute inset-0 bg-black/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 
-              {/* Content overlay - appears on hover */}
-              <div className="absolute inset-0 flex flex-col justify-end p-6 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-4 group-hover:translate-y-0">
-                <div className="bg-white/95 backdrop-blur-sm rounded-xl p-4">
-                  <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-green-600 transition-colors duration-300">
-                    {category.name}
-                  </h3>
-                  <p className="text-gray-700 text-sm mb-3">
-                    {category.description}
-                  </p>
+                {/* Content overlay - appears on hover */}
+                <div className="absolute inset-0 flex flex-col justify-end p-6 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-4 group-hover:translate-y-0">
+                  <div className="bg-white/95 backdrop-blur-sm rounded-xl p-4 glass-card">
+                    <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-green-600 transition-colors duration-300">
+                      {category.name}
+                    </h3>
+                    <p className="text-gray-700 text-sm mb-3">
+                      {category.description}
+                    </p>
 
-                  <div className="flex flex-wrap gap-1 mb-3">
-                    {category.features.map((feature, index) => (
-                      <span
-                        key={index}
-                        className="inline-flex items-center px-2 py-1 bg-green-100 text-green-800 text-xs font-medium rounded-full"
-                      >
-                        {feature}
-                      </span>
-                    ))}
-                  </div>
+                    <div className="flex flex-wrap gap-1 mb-3">
+                      {category.features.map((feature, index) => (
+                        <span
+                          key={index}
+                          className="inline-flex items-center px-2 py-1 bg-green-100 text-green-800 text-xs font-medium rounded-full"
+                        >
+                          {feature}
+                        </span>
+                      ))}
+                    </div>
 
-                  <div className="flex items-center text-green-600 font-medium group-hover:text-green-700 transition-colors duration-300">
-                    <span>Learn More</span>
-                    <svg className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                    </svg>
+                    <div className="flex items-center text-green-600 font-medium group-hover:text-green-700 transition-colors duration-300">
+                      <span>Learn More</span>
+                      <svg className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </svg>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </Link>
-            </ScrollReveal>
+              </Link>
+            </AnimatedSection>
           ))}
         </div>
 

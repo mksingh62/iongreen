@@ -144,7 +144,7 @@ export default async function ProductsPage() {
             {siteContent.products.slice(0, 6).map((product, index) => (
               <ScrollAnimate
                 key={product.title}
-                animation="slideInSmooth"
+                animation={index % 2 === 0 ? "slideInLeftSmooth" : "slideInRightSmooth"}
                 delay={400 + (index * 100)}
               >
                 <Link

@@ -64,13 +64,13 @@ export function NavDropdown({ item, isActive }: NavDropdownProps) {
         <Link
           href={item.href}
           className={cn(
-            "px-3 py-2.5 text-sm font-semibold nav-item transition-all duration-300 relative rounded-lg hover:bg-green-50/50",
+            "px-3 py-2.5 text-sm font-semibold transition-all duration-300 relative rounded-lg hover:bg-green-50/50 no-underline",
             isActive || isOpen ? "text-green-600 bg-green-50/50" : "text-slate-700 hover:text-green-600"
           )}
         >
           {item.label}
           <span className={cn(
-            "absolute bottom-1 left-4 right-4 h-0.5 bg-green-600 transform scale-x-0 transition-transform duration-300 origin-left rounded-full",
+            "absolute bottom-1 left-4 right-4 h-0.5 bg-green-600 transform scale-x-0 transition-transform duration-300 origin-center rounded-full",
             (isActive || isOpen) ? 'scale-x-100' : 'group-hover:scale-x-100'
           )}></span>
         </Link>
@@ -95,7 +95,7 @@ export function NavDropdown({ item, isActive }: NavDropdownProps) {
       {item.items && (
         <div
           className={cn(
-            "absolute left-0 mt-3 w-80 rounded-xl shadow-2xl bg-white/95 backdrop-blur-md ring-1 ring-black/5 py-3 z-50 transition-all duration-300 origin-top-left border border-gray-200/50",
+            "absolute left-0 mt-3 w-80 max-h-[60vh] overflow-y-auto rounded-xl shadow-2xl bg-white/95 backdrop-blur-md ring-1 ring-black/5 py-3 z-50 transition-all duration-300 origin-top-left border border-gray-200/50 scrollbar-thin scrollbar-thumb-green-200 scrollbar-track-transparent",
             isOpen
               ? 'opacity-100 scale-100 visible translate-y-0'
               : 'opacity-0 scale-95 invisible -translate-y-2'
@@ -112,7 +112,7 @@ export function NavDropdown({ item, isActive }: NavDropdownProps) {
             <Link
               key={subItem.href}
               href={subItem.href}
-              className="group block px-5 py-4 text-sm text-slate-700 hover:bg-green-50/80 hover:text-green-700 transition-all duration-300 nav-item border-l-3 border-transparent hover:border-green-500 hover:translate-x-1"
+              className="group block px-5 py-4 text-sm text-slate-700 hover:bg-green-50/80 hover:text-green-700 transition-all duration-300 border-l-3 border-transparent hover:border-green-500 hover:translate-x-1 no-underline"
               style={{ animationDelay: `${index * 50}ms` }}
               onClick={() => setIsOpen(false)}
             >

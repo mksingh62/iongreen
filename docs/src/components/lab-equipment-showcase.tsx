@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from 'react';
-import { ScrollReveal } from "@/components/enhanced-scroll-reveal";
+import { AnimatedSection } from "@/components/ui/animated-section";
 
 interface LabEquipmentItem {
   id: number;
@@ -143,70 +143,77 @@ const LabEquipmentShowcase: React.FC = () => {
     <section className="py-20 bg-gray-50">
       <div className="mx-auto max-w-7xl px-4 md:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-6">
-            Lab Equipment
-          </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            High-quality laboratory equipment for all your research and testing needs
-          </p>
+          <AnimatedSection animation="fadeInUp">
+            <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-6">
+              Lab Equipment
+            </h2>
+          </AnimatedSection>
+          <AnimatedSection animation="fadeInUp" delay={0.2}>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              High-quality laboratory equipment for all your research and testing needs
+            </p>
+          </AnimatedSection>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {equipmentItems.map((item, index) => (
-            <ScrollReveal
+            <AnimatedSection
               key={item.id}
-              direction={index % 2 === 0 ? "right" : "left"}
-              duration={1.0}
+              animation={index % 2 === 0 ? "fadeInRight" : "fadeInLeft"}
+              duration={0.8}
               delay={0.2 * index}
+              className="h-full"
             >
-            <div 
-              className="group relative overflow-hidden rounded-2xl shadow-lg h-96 hover:shadow-xl transition-shadow duration-300"
-            >
-              <div className="relative w-full h-full">
-                <Image
-                  src={item.image_url}
-                  alt={item.name}
-                  fill
-                  className="object-cover transition-transform duration-500 group-hover:scale-110"
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                />
-                
-                {/* Dark overlay */}
-                <div className="absolute inset-0 bg-black/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div
+                className="group relative overflow-hidden rounded-2xl shadow-lg h-96 hover:shadow-xl transition-shadow duration-300"
+              >
+                <div className="relative w-full h-full image-hover-zoom">
+                  <Image
+                    src={item.image_url}
+                    alt={item.name}
+                    fill
+                    className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  />
 
-                {/* Content overlay - appears on hover */}
-                <div className="absolute inset-0 flex flex-col justify-end p-6 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-4 group-hover:translate-y-0">
-                  <div className="bg-white/95 backdrop-blur-sm rounded-xl p-4">
-                    <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-green-600 transition-colors duration-300">
-                      {item.name}
-                    </h3>
-                    <p className="text-gray-700 text-sm mb-3 line-clamp-2">
-                      {item.description}
-                    </p>
-                    <Link href={`/lab-equipment/${item.slug}`} className="flex items-center text-green-600 font-medium group-hover:text-green-700 transition-colors duration-300 cursor-pointer">
-                      <span>Learn More</span>
-                      <svg className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                      </svg>
-                    </Link>
+                  {/* Dark overlay */}
+                  <div className="absolute inset-0 bg-black/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+
+                  {/* Content overlay - appears on hover */}
+                  <div className="absolute inset-0 flex flex-col justify-end p-6 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-4 group-hover:translate-y-0">
+                    <div className="bg-white/95 backdrop-blur-sm rounded-xl p-4 glass-card">
+                      <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-green-600 transition-colors duration-300">
+                        {item.name}
+                      </h3>
+                      <p className="text-gray-700 text-sm mb-3 line-clamp-2">
+                        {item.description}
+                      </p>
+                      <Link href={`/lab-equipment/${item.slug}`} className="flex items-center text-green-600 font-medium group-hover:text-green-700 transition-colors duration-300 cursor-pointer">
+                        <span>Learn More</span>
+                        <svg className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                        </svg>
+                      </Link>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-            </ScrollReveal>
+            </AnimatedSection>
           ))}
         </div>
 
         <div className="mt-12 text-center">
-          <Link 
-            href="/lab-equipment"
-            className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-full text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-300"
-          >
-            Contact Us for More Equipment
-            <svg className="ml-2 -mr-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-              <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
-            </svg>
-          </Link>
+          <AnimatedSection animation="fadeInUp" delay={0.4}>
+            <Link
+              href="/lab-equipment"
+              className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-full text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+            >
+              Contact Us for More Equipment
+              <svg className="ml-2 -mr-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
+              </svg>
+            </Link>
+          </AnimatedSection>
         </div>
       </div>
     </section>

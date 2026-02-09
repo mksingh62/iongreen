@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import React from 'react';
-import { ScrollReveal } from "@/components/enhanced-scroll-reveal";
+import { AnimatedSection } from "@/components/ui/animated-section";
 import { useEffect, useState } from "react";
 
 interface Solution {
@@ -86,23 +86,24 @@ const SolarSolutions: React.FC = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {solutions.map((solution, index) => (
-            <ScrollReveal
+            <AnimatedSection
               key={solution.id}
-              direction={index % 2 === 0 ? "right" : "left"}
-              duration={1.0}
+              animation={index % 2 === 0 ? "fadeInRight" : "fadeInLeft"}
+              duration={0.8}
               delay={0.2 * index}
+              className="h-full"
             >
               <Link
                 href={`/solutions/${solution.slug}`}
                 className="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 hover:border-green-200 block h-64"
               >
                 {/* Full-size image background */}
-                <div className="absolute inset-0">
+                <div className="absolute inset-0 image-hover-zoom">
                   <Image
                     src={solution.image_url}
                     alt={solution.title}
                     fill
-                    className="object-cover object-center group-hover:scale-110 transition-transform duration-500"
+                    className="object-cover object-center group-hover:scale-110 transition-transform duration-700 ease-out"
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     style={{
                       objectFit: 'cover',
@@ -116,7 +117,7 @@ const SolarSolutions: React.FC = () => {
 
                 {/* Content overlay - appears on hover at top */}
                 <div className="absolute inset-0 flex flex-col justify-start p-4 opacity-0 group-hover:opacity-100 transition-all duration-300 transform -translate-y-4 group-hover:translate-y-0">
-                  <div className="bg-white/95 backdrop-blur-sm rounded-xl p-3 mt-2">
+                  <div className="bg-white/95 backdrop-blur-sm rounded-xl p-3 mt-2 glass-card">
                     <h3 className="text-lg font-bold text-gray-900 mb-2 group-hover:text-green-600 transition-colors duration-300">
                       {solution.title}
                     </h3>
@@ -130,7 +131,7 @@ const SolarSolutions: React.FC = () => {
                   </div>
                 </div>
               </Link>
-            </ScrollReveal>
+            </AnimatedSection>
           ))}
         </div>
       </div>

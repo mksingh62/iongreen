@@ -105,22 +105,39 @@ export function Hero({ page = 'home', children, className, slides: externalSlide
   
   // Hardcoded hero slides with the two specified images from public folder
   const hardcodedSlides = [
-    {
-      id: 1,
-      title: 'Advanced Energy Storage Solutions',
-      description: 'Discover cutting-edge battery technology designed for maximum efficiency and reliability.',
-      cta_label: 'Learn More',
-      cta_href: '/products',
-      image_url: '/jjj.jpeg',
-    },
-    {
-      id: 2,
-      title: 'Renewable Energy Integration',
-      description: 'Seamlessly integrate solar and wind power with intelligent energy storage systems.',
-      cta_label: 'Explore Solutions',
-      cta_href: '/solutions',
-      image_url: '/jjjj1.jpeg',
-    },
+    // inside hardcodedSlides in Hero
+{
+  id: 1,
+  title: 'Advanced Energy Storage Solutions',
+  description: 'Discover cutting-edge battery technology designed for maximum efficiency and reliability.',
+  cta_label: 'Learn More',
+  cta_href: '/products',
+  image_url: '/sss.jpeg',
+},
+{
+  id: 2,
+  title: 'Renewable Energy Integration',
+  description: 'Seamlessly integrate solar and wind power with intelligent energy storage systems.',
+  cta_label: 'Explore Solutions',
+  cta_href: '/solutions',
+  image_url: '/hero3.jpeg',
+},
+{
+  id: 3,
+  title: 'Utility & Commercial ESS',
+  description: 'Containerized energy storage systems engineered for industrial and utility applications.',
+  cta_label: 'View Products',
+  cta_href: '/products/energy-storage-system',
+  image_url: '/hero2.jpeg',
+},
+{
+  id: 4,
+  title: 'Solar Solution',
+  description: 'Solar Solution',
+  cta_label: 'View Products',
+  cta_href: '/products/solar-solution',
+  image_url: '/hero1.jpeg',
+},
   ];
 
   // Format hardcoded slides for HeroCarousel component

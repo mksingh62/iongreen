@@ -7,63 +7,41 @@ import { SolarEastNewsSection } from "@/components/solareast-news-section";
 import { CertificationBar } from "@/components/certification-bar";
 import { CTAPanel } from "@/components/cta-panel";
 import { CooperationSection } from "@/components/cooperation-section";
-import { ScrollAnimate } from "@/components/scroll-animate";
 import { SungrowStyleShowcase } from "@/components/sungrow-style-showcase";
-
 import SolarSolutions from "@/components/solar-solutions";
-import LabEquipmentShowcase from '@/components/client/lab-equipment-showcase-client';
+import LabEquipmentShowcase from "@/components/client/lab-equipment-showcase-client";
 import { dbService } from "@/lib/db-service";
 
 export default async function HomePage() {
   const heroSlides = await dbService.getHeroSlides();
 
   return (
-    <>
+    <main className="bg-white">
+      {/* Hero with modern carousel and product categories */}
       <Hero slides={heroSlides} />
 
-      <StatsSection />
+      {/* Key stats overlapping hero slightly for premium feel */}
+      <div className="relative z-10 -mt-20">
+        <StatsSection />
+      </div>
 
-      <ScrollAnimate animation="fadeInUpElegant" delay={200}>
-        <CompanyProfileText />
-      </ScrollAnimate>
+      {/* Company profile / who we are */}
+      <CompanyProfileText />
 
-      <ScrollAnimate animation="fadeInUpElegant" delay={300}>
-        <SungrowStyleShowcase />
-      </ScrollAnimate>
+      {/* Technology & solutions showcases */}
+      <SungrowStyleShowcase />
+      <SolarSolutions />
+      <SolarEastProductShowcase />
 
-      <ScrollAnimate animation="scaleInBounce" delay={300}>
-        <SolarEastProductShowcase />
-      </ScrollAnimate>
+      {/* Trust & social proof */}
+      <CertificationBar />
+      <LabEquipmentShowcase />
+      <SimpleHomepageSidebar />
+      <SolarEastNewsSection />
 
-      <ScrollAnimate animation="fadeInUpElegant" delay={400}>
-        <SolarSolutions />
-      </ScrollAnimate>
-
-      <ScrollAnimate animation="fadeInUpElegant" delay={400}>
-        <CertificationBar />
-      </ScrollAnimate>
-
-      <ScrollAnimate animation="fadeInUpElegant" delay={750}>
-        <LabEquipmentShowcase />
-      </ScrollAnimate>
-
-      <ScrollAnimate animation="slideInRightSmooth" delay={650}>
-        <SimpleHomepageSidebar />
-      </ScrollAnimate>
-
-      <ScrollAnimate animation="cascadeDown" delay={800}>
-        <SolarEastNewsSection />
-      </ScrollAnimate>
-
-      <ScrollAnimate animation="scaleInBounce" delay={850}>
-        <CTAPanel />
-      </ScrollAnimate>
-
-      <ScrollAnimate animation="smoothReveal" delay={950}>
-        <CooperationSection />
-      </ScrollAnimate>
-
-
-    </>
+      {/* Call to action & partnerships */}
+      <CTAPanel />
+      <CooperationSection />
+    </main>
   );
 }

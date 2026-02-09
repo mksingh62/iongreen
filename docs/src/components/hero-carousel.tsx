@@ -3,6 +3,8 @@
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { motion, AnimatePresence } from "framer-motion";
+import { StaggeredText } from "@/components/ui/text-animations";
 import { useState, useEffect } from "react";
 import { ScrollReveal } from "@/components/enhanced-scroll-reveal";
 
@@ -40,59 +42,116 @@ export function HeroCarousel({ slides, categories = [] }: { slides: Slide[]; cat
     setCurrentIndex(index);
   };
 
-  // Auto-scroll effect with pause on hover - every 4.5 seconds
+  // Auto-scroll effect with pause on hover - every 5 seconds (slightly slower for text to read)
   useEffect(() => {
     if (isPaused) return;
-    
+
     const timer = setInterval(() => {
       nextSlide();
-    }, 4500);
+    }, 6000);
 
     return () => clearInterval(timer);
   }, [currentIndex, isPaused]);
 
   return (
-    <div 
+    <div
       className="relative w-full bg-white"
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
     >
       {/* Carousel Background with increased height for products below */}
-      <div className="relative w-full h-[700px]">
+      <div className="relative w-full h-[800px]">
         {/* Carousel Items */}
         <div className="relative w-full h-full">
-          {slides.map((slide, index) => (
-            <div 
-              key={slide.id}
-              className={`carousel-item absolute inset-0 w-full h-full transition-opacity duration-1000 ease-in-out ${
-                index === currentIndex 
-                  ? 'opacity-100 z-10' 
-                  : 'opacity-0 pointer-events-none z-0'
-              }`}
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={currentIndex}
+              initial={{ opacity: 1, x: 100 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -100 }}
+              transition={{
+                duration: 0.8,
+                ease: [0.43, 0.13, 0.23, 0.96]
+              }}
+              className="absolute inset-0 w-full h-full"
             >
               <Image
-                src={slide.image_url}
-                alt={slide.title}
+                src={slides[currentIndex]?.image_url}
+                alt={slides[currentIndex]?.title}
                 fill
                 className="object-cover"
-                priority={index === 0}
+                priority={true}
               />
-              <div className="absolute inset-0 bg-black/40"></div>
-            </div>
-          ))}
+              {/* Slight dark overlay for text readability, kept light to avoid blurry look */}
+              <div className="absolute inset-0 bg-black/50"></div>
+            </motion.div>
+          </AnimatePresence>
         </div>
 
-        {/* Navigation Arrows - Hidden */}
+        {/* Navigation Arrows */}
+        <div className="absolute inset-y-0 left-0 right-0 z-20 flex items-center justify-between px-4 md:px-8 pointer-events-none">
+          <button
+            type="button"
+            aria-label="Previous slide"
+            onClick={prevSlide}
+            className="pointer-events-auto inline-flex h-10 w-10 items-center justify-center rounded-full bg-black/40 text-white hover:bg-black/60 transition-colors"
+          >
+            <ChevronLeft className="h-5 w-5" />
+          </button>
+          <button
+            type="button"
+            aria-label="Next slide"
+            onClick={nextSlide}
+            className="pointer-events-auto inline-flex h-10 w-10 items-center justify-center rounded-full bg-black/40 text-white hover:bg-black/60 transition-colors"
+          >
+            <ChevronRight className="h-5 w-5" />
+          </button>
+        </div>
 
-        {/* Indicators - Hidden */}
+        {/* Text Overlay - vertically centered, left-aligned on desktop */}
+        <div className="absolute inset-0 z-15 flex flex-col justify-center pointer-events-none px-4 md:px-16">
+          <div className="text-white max-w-5xl w-full mx-auto md:mx-0 md:ml-8 lg:ml-16 text-center md:text-left">
+            <div key={`title-${currentIndex}`} className="mb-6 overflow-hidden">
+              <StaggeredText
+                text={slides[currentIndex]?.title}
+                className="text-4xl md:text-7xl font-bold drop-shadow-2xl leading-tight"
+                stagger={0.04}
+                duration={0.6}
+              />
+            </div>
 
-        {/* Text Overlay - Centered Vertically */}
-        <div className="absolute inset-0 z-15 flex flex-col items-center justify-center pointer-events-none">
-          <div className="text-center text-white">
-            <h2 className="text-3xl md:text-5xl font-bold mb-4 drop-shadow-lg">
-              {slides[currentIndex]?.title}
-            </h2>
-            <p className="text-lg md:text-2xl drop-shadow-lg max-w-2xl mx-auto">
-              {slides[currentIndex]?.description}
-            </p>
+            <motion.div
+              key={`desc-${currentIndex}`}
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.8, duration: 0.8 }}
+            >
+              <p className="text-lg md:text-3xl drop-shadow-xl font-light tracking-wide mb-10 max-w-3xl mx-auto md:mx-0 text-gray-100">
+                {slides[currentIndex]?.description}
+              </p>
+
+              <Link href={slides[currentIndex]?.cta_href || "#"}>
+                <button className="pointer-events-auto bg-green-600 hover:bg-green-700 text-white font-semibold py-4 px-10 rounded-full transition-all duration-300 transform hover:scale-105 hover:shadow-green-500/50 shadow-lg text-lg">
+                  {slides[currentIndex]?.cta_label}
+                </button>
+              </Link>
+            </motion.div>
+
+            {/* Slide Indicators */}
+            <div className="mt-8 flex justify-center md:justify-start gap-2 pointer-events-auto">
+              {slides.map((slide, index) => (
+                <button
+                  key={slide.id}
+                  type="button"
+                  aria-label={`Go to slide ${index + 1}`}
+                  onClick={() => goToSlide(index)}
+                  className={`h-2.5 rounded-full transition-all ${index === currentIndex
+                    ? "w-8 bg-white"
+                    : "w-2.5 bg-white/50 hover:bg-white/80"
+                    }`}
+                />
+              ))}
+            </div>
           </div>
         </div>
 

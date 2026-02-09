@@ -2,18 +2,26 @@
 
 /* Animations */
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes fadeInUp {
-  from { 
-    opacity: 0; 
-    transform: translateY(30px); 
+  from {
+    opacity: 0;
+    transform: translateY(30px);
   }
-  to { 
-    opacity: 1; 
-    transform: translateY(0); 
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
@@ -22,20 +30,43 @@
 }
 
 @keyframes scaleUp {
-  from { transform: scale(0.95); }
-  to { transform: scale(1); }
+  from {
+    transform: scale(0.95);
+  }
+
+  to {
+    transform: scale(1);
+  }
 }
 
 @keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
 }
 
 @keyframes blob {
-  0% { transform: translate(0px, 0px) scale(1); }
-  33% { transform: translate(30px, -50px) scale(1.1); }
-  66% { transform: translate(-20px, 20px) scale(0.9); }
-  100% { transform: translate(0px, 0px) scale(1); }
+  0% {
+    transform: translate(0px, 0px) scale(1);
+  }
+
+  33% {
+    transform: translate(30px, -50px) scale(1.1);
+  }
+
+  66% {
+    transform: translate(-20px, 20px) scale(0.9);
+  }
+
+  100% {
+    transform: translate(0px, 0px) scale(1);
+  }
 }
 
 .animate-blob {
@@ -269,10 +300,21 @@ button:hover {
 }
 
 /* Delayed Animations */
-.delay-100 { --delay: 1; }
-.delay-200 { --delay: 2; }
-.delay-300 { --delay: 3; }
-.delay-400 { --delay: 4; }
+.delay-100 {
+  --delay: 1;
+}
+
+.delay-200 {
+  --delay: 2;
+}
+
+.delay-300 {
+  --delay: 3;
+}
+
+.delay-400 {
+  --delay: 4;
+}
 
 /* Flip Card Animation */
 .flip-card {
@@ -371,17 +413,30 @@ button:hover {
   }
 
   /* Typography hierarchy inspired by corporate websites like Sungrow Power */
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     font-family: var(--font-montserrat), sans-serif;
     font-weight: 600;
     line-height: 1.2;
     letter-spacing: -0.025em;
   }
 
-  p, span, a, button, input, textarea, select, label, li {
+  p,
+  span,
+  a,
+  button,
+  input,
+  textarea,
+  select,
+  label,
+  li {
     font-family: var(--font-roboto), sans-serif;
   }
-  
+
   /* Typography Styles - Corporate style like Sungrow Power */
   h1 {
     @apply text-4xl md:text-6xl font-bold leading-tight;
@@ -412,30 +467,37 @@ button:hover {
     @apply text-base md:text-xl font-medium leading-relaxed;
     font-weight: 500;
   }
-  
+
   p {
     @apply text-base leading-relaxed;
   }
-  
-  .text-sm { @apply text-sm leading-relaxed; }
-  .text-xs { @apply text-xs leading-relaxed; }
-  
+
+  .text-sm {
+    @apply text-sm leading-relaxed;
+  }
+
+  .text-xs {
+    @apply text-xs leading-relaxed;
+  }
+
   /* Emphasis and Strong Text */
-  strong, b {
+  strong,
+  b {
     @apply font-bold;
   }
-  
+
   /* Links */
   a {
     @apply text-green-600 hover:text-green-700 underline;
   }
-  
+
   /* Buttons */
   button {
     @apply font-medium;
   }
 
-  html, body {
+  html,
+  body {
     max-width: 100%;
     overflow-x: hidden;
   }
@@ -445,14 +507,14 @@ button:hover {
     background: linear-gradient(180deg, #fff, #f8fafc);
     overflow-x: hidden;
   }
-  
+
   /* Scroll Snap */
   .snap-container {
     scroll-snap-type: y mandatory;
     overflow-y: scroll;
     height: 100vh;
   }
-  
+
   .snap-section {
     scroll-snap-align: start;
   }
@@ -463,15 +525,20 @@ button:hover {
   }
 
   @keyframes sungrowFloat {
-    0%, 100% {
+
+    0%,
+    100% {
       transform: translateY(0px) translateX(0px) rotate(0deg);
     }
+
     25% {
       transform: translateY(-15px) translateX(8px) rotate(2deg);
     }
+
     50% {
       transform: translateY(-8px) translateX(-6px) rotate(-1deg);
     }
+
     75% {
       transform: translateY(-20px) translateX(4px) rotate(1deg);
     }
@@ -498,7 +565,77 @@ button:hover {
   .green-gradient-text {
     background: linear-gradient(135deg, #22c55e, #16a34a);
     -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
     background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
+}
+
+/* Premium Image Hover Zoom */
+.image-hover-zoom {
+  overflow: hidden;
+  border-radius: 0.5rem;
+}
+
+.image-hover-zoom img {
+  transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.image-hover-zoom:hover img {
+  transform: scale(1.1);
+}
+
+/* Glassmorphism Card */
+.glass-card {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+}
+
+/* Text Gradient Animation */
+.animate-text-shimmer {
+  background: linear-gradient(to right,
+      #16a34a 20%,
+      #86efac 30%,
+      #15803d 70%,
+      #16a34a 80%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 500% auto;
+  animation: textShimmer 5s ease-in-out infinite alternate;
+}
+
+@keyframes textShimmer {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
+/* Product Blur Zoom Animation */
+.product-grid-container:hover .product-card {
+  filter: blur(4px);
+  transform: scale(0.95);
+  opacity: 0.8;
+}
+
+.product-card {
+  transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  position: relative;
+  z-index: 1;
+  backface-visibility: hidden;
+}
+
+.product-card:hover {
+  transform: scale(1.05) !important;
+  z-index: 20 !important;
+  filter: blur(0px) !important;
+  opacity: 1 !important;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  background-color: #F1FDEB;
 }

@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { ScrollReveal } from "@/components/enhanced-scroll-reveal";
+import { AnimatedSection } from "@/components/ui/animated-section";
 import Link from "next/link";
 
 const showcaseItems = [
@@ -59,7 +59,7 @@ export function SungrowStyleShowcase() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         {/* Section Header */}
-        <ScrollReveal direction="down" duration={1.2}>
+        <AnimatedSection animation="fadeInUp" duration={1.2}>
           <div className="text-center mb-20">
             <div className="inline-flex items-center gap-3 bg-green-100 px-6 py-3 rounded-full mb-8 border border-green-200">
               <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
@@ -74,16 +74,17 @@ export function SungrowStyleShowcase() {
               Explore our comprehensive portfolio of innovative energy solutions designed to meet the evolving needs of a sustainable world
             </p>
           </div>
-        </ScrollReveal>
+        </AnimatedSection>
 
         {/* Showcase Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
           {showcaseItems.map((item, index) => (
-            <ScrollReveal
+            <AnimatedSection
               key={index}
-              direction={index % 2 === 0 ? "right" : "left"}
-              duration={1.0}
+              animation={index % 2 === 0 ? "fadeInRight" : "fadeInLeft"}
+              duration={0.8}
               delay={0.2 * index}
+              className="h-full"
             >
               <Link
                 href={item.href}
@@ -92,12 +93,12 @@ export function SungrowStyleShowcase() {
                 className="group relative overflow-hidden rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-300 border border-gray-100 hover:border-green-200 block h-96"
               >
                 {/* Full-size image background */}
-                <div className="absolute inset-0 flex items-center justify-center py-2">
+                <div className="absolute inset-0 flex items-center justify-center py-2 image-hover-zoom">
                   <Image
                     src={item.image}
                     alt={item.title}
                     fill
-                    className={`${index === 1 ? 'object-contain p-2' : index === 3 ? 'object-cover translate-y-4' : 'object-cover'} group-hover:scale-110 transition-transform duration-500`}
+                    className={`${index === 1 ? 'object-contain p-2' : index === 3 ? 'object-cover translate-y-4' : 'object-cover'} group-hover:scale-110 transition-transform duration-700 ease-out`}
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   />
                 </div>
@@ -107,7 +108,7 @@ export function SungrowStyleShowcase() {
 
                 {/* Content overlay - appears on hover */}
                 <div className="absolute inset-0 flex flex-col justify-end p-6 invisible opacity-0 group-hover:visible group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto transition-all duration-300 transform translate-y-4 group-hover:translate-y-0">
-                  <div className="bg-white/95 backdrop-blur-sm rounded-xl p-4">
+                  <div className="bg-white/95 backdrop-blur-sm rounded-xl p-4 glass-card">
                     <h3 className="text-xl font-bold text-gray-900 mb-2 font-montserrat">
                       {item.title}
                     </h3>
@@ -132,12 +133,12 @@ export function SungrowStyleShowcase() {
                   </div>
                 </div>
               </Link>
-            </ScrollReveal>
+            </AnimatedSection>
           ))}
         </div>
 
         {/* Bottom CTA Section */}
-        <ScrollReveal direction="up" duration={1.2} delay={0.8}>
+        <AnimatedSection animation="fadeInUp" duration={1.2} delay={0.2}>
           <div className="text-center bg-gradient-to-r from-green-600 via-green-700 to-green-800 rounded-3xl p-12 shadow-2xl relative overflow-hidden">
             {/* Background Pattern */}
             <div className="absolute inset-0 opacity-10">
@@ -201,7 +202,7 @@ export function SungrowStyleShowcase() {
               </div>
             </div>
           </div>
-        </ScrollReveal>
+        </AnimatedSection>
       </div>
     </section>
   );

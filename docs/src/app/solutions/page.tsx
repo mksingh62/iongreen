@@ -89,8 +89,8 @@ export default async function SolutionsPage() {
               return (
               <ScrollAnimate
                 key={solution.id}
-                animation="scaleInBounce"
-                delay={index * 100}
+                animation={index % 2 === 0 ? "slideInLeftSmooth" : "slideInRightSmooth"}
+                delay={200 + (index * 100)}
               >
                 <Link
                   href={`/solutions/${solution.slug}`}

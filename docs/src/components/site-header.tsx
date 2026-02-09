@@ -49,13 +49,13 @@ export function SiteHeader() {
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  "relative px-3 py-2.5 text-sm font-semibold text-slate-700 nav-item transition-all duration-300 hover:text-green-600 hover:bg-green-50/50 rounded-lg",
+                  "relative px-3 py-2.5 text-sm font-semibold text-slate-700 transition-all duration-300 hover:text-green-600 hover:bg-green-50/50 rounded-lg no-underline",
                   pathname === item.href && "text-green-600 bg-green-50/50"
                 )}
               >
                 {item.label}
                 <span className={cn(
-                  "absolute bottom-1 left-4 right-4 h-0.5 bg-green-600 transform scale-x-0 transition-transform duration-300 origin-left rounded-full",
+                  "absolute bottom-1 left-4 right-4 h-0.5 bg-green-600 transform scale-x-0 transition-transform duration-300 origin-center rounded-full",
                   pathname === item.href ? 'scale-x-100' : 'group-hover:scale-x-100'
                 )}></span>
               </Link>
@@ -66,7 +66,7 @@ export function SiteHeader() {
         <div className="hidden items-center lg:flex">
           <Link
             href="/contact"
-            className="rounded-lg bg-gradient-to-r from-green-600 to-green-700 px-6 py-2.5 text-sm font-semibold text-white shadow-lg hover:shadow-xl hover:from-green-700 hover:to-green-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600 transition-all duration-300 hover:scale-105"
+            className="rounded-lg bg-gradient-to-r from-green-600 to-green-700 px-6 py-2.5 text-sm font-semibold text-white shadow-lg hover:shadow-xl hover:from-green-700 hover:to-green-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600 transition-all duration-300 hover:scale-105 no-underline"
           >
             Contact Us
           </Link>
@@ -122,7 +122,7 @@ function MobileMenu({ navItems }: MobileMenuProps) {
                           key={subItem.href}
                           href={subItem.href}
                           className={cn(
-                            "block w-full rounded-lg px-4 py-3 text-sm transition-all duration-300 hover:bg-slate-50 hover:translate-x-1",
+                            "block w-full rounded-lg px-4 py-3 text-sm transition-all duration-300 hover:bg-slate-50 hover:translate-x-1 no-underline",
                             pathname === subItem.href ? "text-green-600 bg-green-50 font-semibold" : "text-slate-700 hover:text-green-600"
                           )}
                           onClick={() => setOpen(false)}
@@ -141,7 +141,7 @@ function MobileMenu({ navItems }: MobileMenuProps) {
                   <Link
                     href={item.href}
                     className={cn(
-                      "block w-full rounded-lg px-4 py-3 text-sm font-semibold transition-all duration-300 hover:bg-slate-50 hover:translate-x-1",
+                      "block w-full rounded-lg px-4 py-3 text-sm font-semibold transition-all duration-300 hover:bg-slate-50 hover:translate-x-1 no-underline",
                       pathname === item.href ? "text-green-600 bg-green-50" : "text-slate-700 hover:text-green-600"
                     )}
                     onClick={() => setOpen(false)}
@@ -154,7 +154,7 @@ function MobileMenu({ navItems }: MobileMenuProps) {
             <div className="mt-6 pt-4 border-t border-slate-200">
               <Link
                 href="/contact"
-                className="block w-full rounded-lg bg-gradient-to-r from-green-600 to-green-700 px-4 py-3 text-center text-sm font-semibold text-white shadow-lg hover:shadow-xl hover:from-green-700 hover:to-green-800 transition-all duration-300 hover:scale-105"
+                className="block w-full rounded-lg bg-gradient-to-r from-green-600 to-green-700 px-4 py-3 text-center text-sm font-semibold text-white shadow-lg hover:shadow-xl hover:from-green-700 hover:to-green-800 transition-all duration-300 hover:scale-105 no-underline"
                 onClick={() => setOpen(false)}
               >
                 Contact Us

@@ -187,48 +187,75 @@ export function HeroCarousel({ slides, categories = [] }: { slides: Slide[]; cat
                   />
                 ))}
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-6 md:gap-8 justify-start">
+              <motion.div
+                className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-6 md:gap-8 justify-start"
+                initial="hidden"
+                animate="visible"
+                variants={{
+                  hidden: { opacity: 0 },
+                  visible: {
+                    opacity: 1,
+                    transition: {
+                      staggerChildren: 0.1,
+                      delayChildren: 0.5
+                    }
+                  }
+                }}
+              >
                 {categories.map((category, index) => (
-                  <Link
+                  <motion.div
                     key={category.name}
-                    href={category.href}
-                    className="group relative h-48 rounded-xl overflow-hidden cursor-pointer border border-white/10 bg-black/40 backdrop-blur-md transition-all duration-500 hover:border-green-500/50 hover:-translate-y-4 hover:shadow-[0_15px_30px_rgba(34,197,94,0.2)] block"
-                    style={{ animationDelay: `${index * 100}ms` }}
+                    variants={{
+                      hidden: { opacity: 0, y: 30 },
+                      visible: {
+                        opacity: 1,
+                        y: 0,
+                        transition: {
+                          duration: 0.8,
+                          ease: [0.21, 0.45, 0.32, 0.9]
+                        }
+                      }
+                    }}
                   >
-                    {/* Background Image */}
-                    <div className="absolute inset-0">
-                      <Image
-                        src={category.image}
-                        alt={category.name}
-                        fill
-                        className="object-cover opacity-40 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700"
-                      />
-                    </div>
-
-                    {/* Overlay Gradient */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
-
-                    {/* Card Content */}
-                    <div className="absolute inset-0 p-4 flex flex-col justify-end z-10">
-                      <div className="transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
-                        {/* Icon Box */}
-                        <div className="w-8 h-8 bg-green-500/20 backdrop-blur-md rounded-md flex items-center justify-center text-green-400 border border-green-500/30 mb-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                          <span className="text-base">{category.icon}</span>
-                        </div>
-                        <h4 className="text-[12px] font-black uppercase tracking-widest text-white leading-tight mb-1">
-                          {category.name}
-                        </h4>
-                        <p className="text-[10px] text-green-400 font-bold opacity-0 group-hover:opacity-100 transition-opacity uppercase tracking-tighter">
-                          Explore More
-                        </p>
+                    <Link
+                      href={category.href}
+                      className="group relative h-48 rounded-xl overflow-hidden cursor-pointer border border-white/10 bg-black/40 backdrop-blur-md transition-all duration-500 hover:border-green-500/50 hover:-translate-y-4 hover:shadow-[0_15px_30px_rgba(34,197,94,0.2)] block"
+                    >
+                      {/* Background Image */}
+                      <div className="absolute inset-0">
+                        <Image
+                          src={category.image}
+                          alt={category.name}
+                          fill
+                          className="object-cover opacity-40 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700"
+                        />
                       </div>
-                    </div>
 
-                    {/* Bottom Neon Line */}
-                    <div className="absolute bottom-0 left-0 h-1 bg-green-500 w-0 group-hover:w-full transition-all duration-500" />
-                  </Link>
+                      {/* Overlay Gradient */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
+
+                      {/* Card Content */}
+                      <div className="absolute inset-0 p-4 flex flex-col justify-end z-10">
+                        <div className="transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
+                          {/* Icon Box */}
+                          <div className="w-8 h-8 bg-green-500/20 backdrop-blur-md rounded-md flex items-center justify-center text-green-400 border border-green-500/30 mb-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                            <span className="text-base">{category.icon}</span>
+                          </div>
+                          <h4 className="text-[12px] font-black uppercase tracking-widest text-white leading-tight mb-1">
+                            {category.name}
+                          </h4>
+                          <p className="text-[10px] text-green-400 font-bold opacity-0 group-hover:opacity-100 transition-opacity uppercase tracking-tighter">
+                            Explore More
+                          </p>
+                        </div>
+                      </div>
+
+                      {/* Bottom Neon Line */}
+                      <div className="absolute bottom-0 left-0 h-1 bg-green-500 w-0 group-hover:w-full transition-all duration-500" />
+                    </Link>
+                  </motion.div>
                 ))}
-              </div>
+              </motion.div>
             </div>
           </div>
         )}
